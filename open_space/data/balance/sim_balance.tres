@@ -1,0 +1,6 @@
+[gd_resource type="Resource" script_class="SimBalance" format=3 uid="uid://bjk6yp2uai8xm"]
+
+[ext_resource type="Script" uid="uid://b0gt42ujq256j" path="res://scripts/systems/sim_balance.gd" id="1"]
+
+[resource]
+script = ExtResource("1")

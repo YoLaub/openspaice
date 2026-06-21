@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="AgentArchetype" format=3 uid="uid://bwk4b3ovy6hvg"]
+
+[ext_resource type="Script" uid="uid://46i87v4a1maq" path="res://scripts/agents/agent_archetype.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+display_name = "Heures sup"
+move_speed = 3.4
+tint = Color(0.66, 0.5, 0.4, 1)
+departure_offset = 0.15

@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="AgentArchetype" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/agents/agent_archetype.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+display_name = "Stable"
+move_speed = 2.6
+tint = Color(0.42, 0.55, 0.62, 1)
+departure_offset = 0.0

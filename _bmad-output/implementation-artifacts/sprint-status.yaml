@@ -1,0 +1,119 @@
+# generated: 2026-06-21
+# last_updated: 2026-06-21
+# project: OpenSpAIce
+# project_key: NOKEY
+# tracking_system: file-system
+# story_location: {project-root}/_bmad-output/implementation-artifacts
+
+# STATUS DEFINITIONS:
+# ==================
+# Epic Status:
+#   - backlog: Epic not yet started
+#   - in-progress: Epic actively being worked on
+#   - done: All stories in epic completed
+#
+# Epic Status Transitions:
+#   - backlog → in-progress: Automatically when first story is created (via create-story)
+#   - in-progress → done: Manually when all stories reach 'done' status
+#
+# Story Status:
+#   - backlog: Story only exists in epic file
+#   - ready-for-dev: Story file created in stories folder
+#   - in-progress: Developer actively working on implementation
+#   - review: Ready for code review (via Dev's code-review workflow)
+#   - done: Story completed
+#
+# Retrospective Status:
+#   - optional: Can be completed but not required
+#   - done: Retrospective has been completed
+#
+# WORKFLOW NOTES:
+# ===============
+# - Epic transitions to 'in-progress' automatically when first story is created
+# - Stories can be worked in parallel if team capacity allows
+# - Developer typically creates next story after previous one is 'done' to incorporate learnings
+# - Dev moves story to 'review', then runs code-review (fresh context, different LLM recommended)
+
+generated: 2026-06-21
+last_updated: 2026-06-21
+project: OpenSpAIce
+project_key: NOKEY
+tracking_system: file-system
+story_location: "{project-root}/_bmad-output/implementation-artifacts"
+
+development_status:
+  # Epic 1: Open space & boucle cœur (MVP)
+  epic-1: in-progress
+  1-1-fondations-du-projet-open-space-iso-navigable: review
+  1-2-agents-natifs-spawn-deplacement-cycle-de-journee: review
+  1-3-horloge-de-jeu-pausable-journees-ouvrees: review
+  1-4-sollicitations-agent-au-bureau-mail: backlog
+  1-5-pop-up-de-decision-2-3-options: backlog
+  1-6-resolution-immediate-vs-differee: backlog
+  1-7-file-dattente-patience-jauge-moral: backlog
+  1-8-hud-persistant-ressource-attention: backlog
+  1-9-fiche-agent-selection: backlog
+  1-10-bilan-de-fin-de-journee: backlog
+  epic-1-retrospective: optional
+
+  # Epic 2: Bien-être & émergence
+  epic-2: backlog
+  2-1-jauge-fatigue-par-agent: backlog
+  2-2-burnout-seuil-de-risque-craquage: backlog
+  2-3-gestion-du-temps-de-travail: backlog
+  2-4-concertations-visibles-entre-agents: backlog
+  2-5-contagion-du-moral-par-les-echanges: backlog
+  2-6-evenements-de-vie-perso: backlog
+  2-7-garde-fous-demergence: backlog
+  epic-2-retrospective: optional
+
+  # Epic 3: Économie & agencement
+  epic-3: backlog
+  3-1-tresorerie-revenus-depenses-faillite: backlog
+  3-2-recrutement-dagents: backlog
+  3-3-placement-de-mobilier-snap-to-grid: backlog
+  3-4-effets-de-zone-du-mobilier: backlog
+  3-5-agrandissement-de-lopen-space-par-paliers: backlog
+  epic-3-retrospective: optional
+
+  # Epic 4: Missions & progression vers l'IPO
+  epic-4: backlog
+  4-1-ecran-de-creation-de-partie: backlog
+  4-2-systeme-de-contrats-missions: backlog
+  4-3-avancement-de-mission-deadline: backlog
+  4-4-jalons-de-croissance-deblocages: backlog
+  4-5-mode-scenario-enchainement-vers-lipo: backlog
+  4-6-condition-de-victoire-seuils-ecran-dipo: backlog
+  4-7-conditions-de-defaite-faillite-effondrement: backlog
+  epic-4-retrospective: optional
+
+  # Epic 5: Intégration LLM (le hook)
+  epic-5: backlog
+  5-1-byok-saisie-stockage-local-securise-de-la-cle: backlog
+  5-2-llmservice-async-fallback-natif: backlog
+  5-3-llmbrain-swap-a-chaud-via-braincomponent: backlog
+  5-4-budget-ia-ressource-dediee: backlog
+  5-5-brancher-debrancher-ui-signe-visuel-cout: backlog
+  5-6-deblocage-du-llm-apres-le-1er-jalon: backlog
+  5-7-bonus-branche-50-efficacite-initiatives: backlog
+  5-8-derapage-le-pari-genie-chaos: backlog
+  epic-5-retrospective: optional
+
+  # Epic 6: Art, audio & game feel
+  epic-6: backlog
+  6-1-direction-artistique-3d-iso-da-severance: backlog
+  6-2-animations-dagents: backlog
+  6-3-indicateurs-au-dessus-des-tetes: backlog
+  6-4-audio-adaptatif: backlog
+  6-5-polish-de-feedback-lisibilite: backlog
+  epic-6-retrospective: optional
+
+  # Epic 7: Modes, méta & polish
+  epic-7: backlog
+  7-1-sauvegarde-chargement-de-letat-complet: backlog
+  7-2-mode-infini-difficulte-croissante-score: backlog
+  7-3-tutoriel-onboarding-doux: backlog
+  7-4-equilibrage-par-playtest: backlog
+  7-5-integration-steam: backlog
+  7-6-build-demo-itch-io-options-accessibilite: backlog
+  epic-7-retrospective: optional
