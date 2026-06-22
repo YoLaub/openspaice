@@ -13,6 +13,12 @@ var arrived_at_post: bool = false
 ## (calculé par agent : phase de journée >= phase de départ personnelle)
 var evening: bool = false
 
-func _init(p_arrived_at_post: bool = false, p_evening: bool = false) -> void:
+## Story 1.4 : l'agent a-t-il une sollicitation PRÉSENTIELLE (bureau) en cours ?
+## Si oui, le cerveau le dirige vers le bureau du joueur (action GO_TO_DESK).
+## Posé par SolicitationSystem via l'agent ; le canal MAIL ne touche pas ce champ.
+var has_desk_solicitation: bool = false
+
+func _init(p_arrived_at_post: bool = false, p_evening: bool = false, p_has_desk_solicitation: bool = false) -> void:
 	arrived_at_post = p_arrived_at_post
 	evening = p_evening
+	has_desk_solicitation = p_has_desk_solicitation

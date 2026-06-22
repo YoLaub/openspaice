@@ -23,3 +23,34 @@ signal agent_departed(agent_id: int)
 signal game_paused(is_paused: bool)
 ## Émis quand le niveau de vitesse change (1/2/3). Le HUD (Story 1.8) s'y abonnera.
 signal speed_changed(speed_level: int)
+
+# --- Sollicitations (Story 1.4) ---
+## Émis quand un agent lève une sollicitation. channel = Solicitation.Channel
+## (0 = DESK / bureau, 1 = MAIL). Le compteur HUD (Story 1.8) s'y abonnera.
+signal solicitation_raised(agent_id: int, channel: int)
+## Émis quand le joueur ouvre une sollicitation (clic). Consommé par la pop-up de
+## décision (Story 1.5) ; alimente aussi le compteur HUD (Story 1.8).
+signal solicitation_opened(agent_id: int, channel: int)
+
+# --- Décisions (Story 1.5) ---
+## Émis quand le joueur CHOISIT une option de la pop-up de décision. option_index est
+## l'index (0-based) de l'option choisie dans Decision.options. Consommé par la
+## RÉSOLUTION immédiate/différée (Story 1.6, qui émettra ensuite decision_resolved) ;
+## alimentera aussi le compteur HUD (Story 1.8). ⚠️ NE PAS confondre avec le signal
+## fondateur decision_resolved (effet appliqué) — ici on signale seulement le CHOIX.
+signal decision_chosen(decision_id: int, option_index: int)
+
+# --- Résolution des décisions (Story 1.6) ---
+## Émis par la pop-up au CHOIX d'une option : porte l'EFFET (outcome) de l'option choisie
+## (data-driven .tres). Consommé par DecisionResolver (Story 1.6) qui classe immédiat
+## (~60 %) vs différé (~40 %) puis émet le signal fondateur decision_resolved. Distinct de
+## decision_chosen (« clic UI », pour le compteur HUD Story 1.8, qui n'a pas besoin de
+## l'effet) : ici on transporte l'issue À RÉSOUDRE, pas l'index du bouton.
+signal decision_committed(decision_id: int, outcome: int)
+
+# --- Moral & file d'attente (Story 1.7) ---
+## Émis par l'agent quand sa jauge Moral (0-100) change effectivement (uniquement sur
+## variation réelle, pas à chaque tick). morale = valeur entière courante. Consommé plus
+## tard par la fiche agent (Story 1.9) et le HUD (Story 1.8). Source de variation à ce
+## stade : l'impatience en file d'attente au bureau (DeskQueue).
+signal agent_morale_changed(agent_id: int, morale: int)

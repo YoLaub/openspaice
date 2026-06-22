@@ -26,6 +26,7 @@ func _on_day_started(day: int) -> void:
 	_clear_agents()
 	var posts: Array[Vector3] = _open_space.post_world_positions()
 	var entrance: Vector3 = _open_space.entrance_world()
+	var desk: Vector3 = _open_space.desk_world()
 	var count: int = mini(_BALANCE.agent_count, posts.size())
 	for i: int in count:
 		var archetype: AgentArchetype = _ARCHETYPES[i % _ARCHETYPES.size()]
@@ -33,7 +34,8 @@ func _on_day_started(day: int) -> void:
 		# même point d'entrée/sortie et s'empilent (collisions → blocage à la porte).
 		var door_slot: Vector3 = entrance + Vector3(0.0, 0.0, float(i) * 0.9)
 		var agent: Agent = AgentFactoryC.create(
-			_next_id, archetype, posts[i], door_slot, _BALANCE.evening_phase)
+			_next_id, archetype, posts[i], door_slot, desk, _BALANCE.evening_phase,
+			_BALANCE.agent_initial_morale)
 		_next_id += 1
 		# position locale avant add_child (le conteneur Agents est à l'origine →
 		# local == global) : l'agent est bien placé avant que son _ready ne tourne.

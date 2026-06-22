@@ -3,6 +3,11 @@
 [ext_resource type="Script" uid="uid://c8edqlsp086v3" path="res://scripts/world/open_space.gd" id="1"]
 [ext_resource type="Script" uid="uid://dcowpkks2htb1" path="res://scripts/world/camera_controller.gd" id="2"]
 [ext_resource type="Script" uid="uid://bhx0amydje7i1" path="res://scripts/world/agent_spawner.gd" id="3"]
+[ext_resource type="Script" uid="uid://l1hrwrpdends" path="res://scripts/decisions/solicitation_system.gd" id="4"]
+[ext_resource type="Script" uid="uid://dv8e57bfuarnm" path="res://scripts/world/selection_controller.gd" id="5"]
+[ext_resource type="PackedScene" path="res://scenes/ui/decision_popup.tscn" id="6"]
+[ext_resource type="Script" path="res://scripts/decisions/decision_resolver.gd" id="7"]
+[ext_resource type="Script" path="res://scripts/systems/desk_queue.gd" id="8"]
 
 [sub_resource type="Environment" id="Environment_1"]
 background_mode = 1
@@ -23,6 +28,24 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0026080683, 0, 0)
 
 [node name="AgentSpawner" type="Node" parent="." unique_id=804203904]
 script = ExtResource("3")
+
+[node name="SolicitationSystem" type="Node" parent="." unique_id=804203905]
+unique_name_in_owner = true
+script = ExtResource("4")
+
+[node name="SelectionController" type="Node" parent="." unique_id=804203906]
+script = ExtResource("5")
+
+[node name="DecisionPopup" parent="." instance=ExtResource("6")]
+unique_name_in_owner = true
+
+[node name="DecisionResolver" type="Node" parent="." unique_id=804203907]
+unique_name_in_owner = true
+script = ExtResource("7")
+
+[node name="DeskQueue" type="Node" parent="." unique_id=804203908]
+unique_name_in_owner = true
+script = ExtResource("8")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=842886542]
 environment = SubResource("Environment_1")

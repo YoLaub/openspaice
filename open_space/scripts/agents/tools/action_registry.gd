@@ -14,8 +14,12 @@ const GO_TO_POST: StringName = &"go_to_post"
 const WORK: StringName = &"work"
 const IDLE: StringName = &"idle"
 const LEAVE: StringName = &"leave"
+## Story 1.4 : l'agent se déplace jusqu'au bureau du joueur pour une sollicitation
+## présentielle (canal DESK). Capacité de locomotion → enregistrée ICI (golden rule
+## ADR-1) ; en Épic 5 le LLMBrain disposera de la même action (parité garantie).
+const GO_TO_DESK: StringName = &"go_to_desk"
 
-const KNOWN: Array[StringName] = [GO_TO_POST, WORK, IDLE, LEAVE]
+const KNOWN: Array[StringName] = [GO_TO_POST, WORK, IDLE, LEAVE, GO_TO_DESK]
 
 ## Fabrique l'action demandée après vérification qu'elle est bien enregistrée.
 static func make(action_type: StringName, data: Dictionary = {}) -> AgentAction:

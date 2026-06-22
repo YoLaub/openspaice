@@ -14,7 +14,9 @@ static func create(
 		archetype: AgentArchetype,
 		post_position: Vector3,
 		exit_position: Vector3,
-		evening_phase: float) -> Agent:
+		desk_position: Vector3,
+		evening_phase: float,
+		initial_morale: float = 100.0) -> Agent:
 	var agent: Agent = _AGENT_SCENE.instantiate()
-	agent.setup(id, archetype, post_position, exit_position, evening_phase)
+	agent.setup(id, archetype, post_position, exit_position, desk_position, evening_phase, initial_morale)
 	return agent

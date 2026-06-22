@@ -23,6 +23,14 @@ const _POST_CELLS: Array[Vector2i] = [
 	Vector2i(3, 8), Vector2i(8, 8), Vector2i(6, 9),
 ]
 const _ENTRANCE_CELL: Vector2i = Vector2i(0, 6)  # porte d'entrée/sortie (bord du plateau)
+## Bureau du joueur (Story 1.4) : coin du plateau, hors postes et hors entrée. Les
+## agents sollicitant en présentiel s'y déplacent. La file d'attente physique est 1.7.
+const _DESK_CELL: Vector2i = Vector2i(11, 11)
+## File d'attente (Story 1.7) : la queue s'étire depuis le bureau vers l'intérieur du
+## plateau, le long du mur du fond (-X). Espacement > 2 × agent_radius (0.4) → pas de
+## chevauchement. Slot 0 = au bureau ; slots suivants alignés derrière.
+const _DESK_QUEUE_DIR: Vector3 = Vector3(-1.0, 0.0, 0.0)
+const _DESK_QUEUE_SPACING: float = 1.5
 
 @onready var _grid: GridMap = $GridMap
 @onready var _light: DirectionalLight3D = $DirectionalLight3D
@@ -93,6 +101,15 @@ func cell_to_world(cell: Vector2i) -> Vector3:
 ## Position d'entrée/sortie des agents (bord du plateau).
 func entrance_world() -> Vector3:
 	return cell_to_world(_ENTRANCE_CELL)
+
+## Position-monde du bureau du joueur (cible des sollicitations présentielles, Story 1.4).
+func desk_world() -> Vector3:
+	return cell_to_world(_DESK_CELL)
+
+## Position-monde du créneau `index` de la file d'attente du bureau (Story 1.7).
+## Slot 0 == desk_world() (devant le joueur) ; slots suivants alignés derrière.
+func desk_queue_slot_world(index: int) -> Vector3:
+	return desk_world() + _DESK_QUEUE_DIR * (_DESK_QUEUE_SPACING * float(index))
 
 ## Positions de postes de travail (placeholders), dans l'ordre d'assignation.
 func post_world_positions() -> Array[Vector3]:

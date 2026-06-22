@@ -35,7 +35,7 @@
 # - Dev moves story to 'review', then runs code-review (fresh context, different LLM recommended)
 
 generated: 2026-06-21
-last_updated: 2026-06-21
+last_updated: 2026-06-22
 project: OpenSpAIce
 project_key: NOKEY
 tracking_system: file-system
@@ -47,10 +47,10 @@ development_status:
   1-1-fondations-du-projet-open-space-iso-navigable: review
   1-2-agents-natifs-spawn-deplacement-cycle-de-journee: review
   1-3-horloge-de-jeu-pausable-journees-ouvrees: review
-  1-4-sollicitations-agent-au-bureau-mail: backlog
-  1-5-pop-up-de-decision-2-3-options: backlog
-  1-6-resolution-immediate-vs-differee: backlog
-  1-7-file-dattente-patience-jauge-moral: backlog
+  1-4-sollicitations-agent-au-bureau-mail: review
+  1-5-pop-up-de-decision-2-3-options: review
+  1-6-resolution-immediate-vs-differee: review
+  1-7-file-dattente-patience-jauge-moral: review
   1-8-hud-persistant-ressource-attention: backlog
   1-9-fiche-agent-selection: backlog
   1-10-bilan-de-fin-de-journee: backlog
