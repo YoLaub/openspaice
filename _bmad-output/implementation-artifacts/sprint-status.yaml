@@ -35,7 +35,7 @@
 # - Dev moves story to 'review', then runs code-review (fresh context, different LLM recommended)
 
 generated: 2026-06-21
-last_updated: 2026-06-22
+last_updated: 2026-06-23
 project: OpenSpAIce
 project_key: NOKEY
 tracking_system: file-system
@@ -51,14 +51,14 @@ development_status:
   1-5-pop-up-de-decision-2-3-options: review
   1-6-resolution-immediate-vs-differee: review
   1-7-file-dattente-patience-jauge-moral: review
-  1-8-hud-persistant-ressource-attention: backlog
-  1-9-fiche-agent-selection: backlog
-  1-10-bilan-de-fin-de-journee: backlog
+  1-8-hud-persistant-ressource-attention: review
+  1-9-fiche-agent-selection: review
+  1-10-bilan-de-fin-de-journee: review
   epic-1-retrospective: optional
 
   # Epic 2: Bien-être & émergence
-  epic-2: backlog
-  2-1-jauge-fatigue-par-agent: backlog
+  epic-2: in-progress
+  2-1-jauge-fatigue-par-agent: review
   2-2-burnout-seuil-de-risque-craquage: backlog
   2-3-gestion-du-temps-de-travail: backlog
   2-4-concertations-visibles-entre-agents: backlog

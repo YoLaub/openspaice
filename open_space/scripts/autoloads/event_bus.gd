@@ -54,3 +54,10 @@ signal decision_committed(decision_id: int, outcome: int)
 ## tard par la fiche agent (Story 1.9) et le HUD (Story 1.8). Source de variation à ce
 ## stade : l'impatience en file d'attente au bureau (DeskQueue).
 signal agent_morale_changed(agent_id: int, morale: int)
+
+# --- Fatigue (Story 2.1) ---
+## Émis par l'agent quand sa jauge Fatigue (0-100) change effectivement (uniquement sur
+## variation réelle, pas à chaque tick — jumeau de agent_morale_changed). fatigue = valeur
+## entière courante. Consommé par la fiche agent (1.9, affichage live) et par l'AgentSpawner
+## (report inter-jour : il mémorise la dernière fatigue connue avant le départ du soir).
+signal agent_fatigue_changed(agent_id: int, fatigue: int)

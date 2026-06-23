@@ -1,0 +1,57 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/ui/hud.gd" id="1"]
+
+[node name="Hud" type="CanvasLayer"]
+script = ExtResource("1")
+
+[node name="TopBar" type="PanelContainer" parent="."]
+anchor_right = 1.0
+offset_bottom = 40.0
+mouse_filter = 2
+self_modulate = Color(1, 1, 1, 0.55)
+
+[node name="Margin" type="MarginContainer" parent="TopBar"]
+mouse_filter = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 6
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 6
+
+[node name="HBox" type="HBoxContainer" parent="TopBar/Margin"]
+mouse_filter = 2
+theme_override_constants/separation = 28
+
+[node name="DayLabel" type="Label" parent="TopBar/Margin/HBox"]
+unique_name_in_owner = true
+mouse_filter = 2
+text = "Jour 0"
+
+[node name="MoraleLabel" type="Label" parent="TopBar/Margin/HBox"]
+unique_name_in_owner = true
+mouse_filter = 2
+text = "Moral moyen : —"
+
+[node name="FileLabel" type="Label" parent="TopBar/Margin/HBox"]
+unique_name_in_owner = true
+mouse_filter = 2
+text = "File bureau : 0"
+
+[node name="MailLabel" type="Label" parent="TopBar/Margin/HBox"]
+unique_name_in_owner = true
+mouse_filter = 2
+text = "Mails : 0"
+
+[node name="TreasuryLabel" type="Label" parent="TopBar/Margin/HBox"]
+unique_name_in_owner = true
+mouse_filter = 2
+text = "€ —"
+
+[node name="Spacer" type="Control" parent="TopBar/Margin/HBox"]
+mouse_filter = 2
+size_flags_horizontal = 3
+
+[node name="TimeLabel" type="Label" parent="TopBar/Margin/HBox"]
+unique_name_in_owner = true
+mouse_filter = 2
+text = "x1"

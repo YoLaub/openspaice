@@ -15,3 +15,6 @@ extends Resource
 ## Décalage de départ du soir : 0.0 = part au seuil du soir, >0 = part plus tard.
 ## Échelonne les départs ("certains plus tôt, d'autres plus tard").
 @export var departure_offset: float = 0.0
+## Story 2.1 : l'agent fait des heures sup' par défaut → +15 fatigue/nuit (FR13). En 2.1
+## c'est une propriété d'archétype ; le réglage joueur (par agent) est la Story 2.3.
+@export var does_overtime: bool = false

@@ -8,6 +8,9 @@
 [ext_resource type="PackedScene" path="res://scenes/ui/decision_popup.tscn" id="6"]
 [ext_resource type="Script" path="res://scripts/decisions/decision_resolver.gd" id="7"]
 [ext_resource type="Script" path="res://scripts/systems/desk_queue.gd" id="8"]
+[ext_resource type="PackedScene" path="res://scenes/ui/hud.tscn" id="9"]
+[ext_resource type="PackedScene" path="res://scenes/ui/agent_card.tscn" id="10"]
+[ext_resource type="PackedScene" path="res://scenes/ui/day_report.tscn" id="11"]
 
 [sub_resource type="Environment" id="Environment_1"]
 background_mode = 1
@@ -46,6 +49,15 @@ script = ExtResource("7")
 [node name="DeskQueue" type="Node" parent="." unique_id=804203908]
 unique_name_in_owner = true
 script = ExtResource("8")
+
+[node name="Hud" parent="." instance=ExtResource("9")]
+unique_name_in_owner = true
+
+[node name="AgentCard" parent="." instance=ExtResource("10")]
+unique_name_in_owner = true
+
+[node name="DayReport" parent="." instance=ExtResource("11")]
+unique_name_in_owner = true
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=842886542]
 environment = SubResource("Environment_1")

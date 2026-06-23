@@ -9,6 +9,7 @@ extends CharacterBody3D
 ## [Source: game-architecture.md#Novel-Pattern ; #State-Patterns ; ADR-3 ; epics.md Story 1.2]
 
 const DayPhaseMathC := preload("res://scripts/agents/day_phase_math.gd")
+const _BALANCE: SimBalance = preload("res://data/balance/sim_balance.tres")
 
 const _ARRIVE_EPS: float = 0.6  # tolérance d'arrivée (m), garde-fou nav non prête
 
@@ -24,6 +25,12 @@ var agent_id: int = -1
 ## Jauge Moral (0-100), Story 1.7. Valeur portée par l'agent (lue par la fiche 1.9 /
 ## HUD 1.8) ; bornage via MoraleMath ; baisse pilotée par DeskQueue (impatience en file).
 var _morale: float = 100.0
+
+## Jauge Fatigue (0-100), Story 2.1. Jumelle du Moral : portée par l'agent (lue par la
+## fiche 1.9), bornée via FatigueMath ; MONTE au travail (accumulation sur SimClock,
+## proportionnelle à l'avance de la journée) ; reportée d'un jour à l'autre par le roster
+## persistant de l'AgentSpawner (repos -25/nuit, +15 si heures sup').
+var _fatigue: float = 0.0
 
 var _archetype: AgentArchetype = null
 var _move_speed: float = 3.0
@@ -58,7 +65,7 @@ var _blink_time: float = 0.0
 
 ## Configure l'agent depuis son archétype. Appelé par l'AgentFactory AVANT add_child
 ## (les nœuds existent mais _ready n'a pas encore tourné → on ne stocke que des valeurs).
-func setup(id: int, archetype: AgentArchetype, post: Vector3, exit: Vector3, desk: Vector3, evening_phase: float, initial_morale: float = 100.0) -> void:
+func setup(id: int, archetype: AgentArchetype, post: Vector3, exit: Vector3, desk: Vector3, evening_phase: float, initial_morale: float = 100.0, initial_fatigue: float = 0.0) -> void:
 	agent_id = id
 	_archetype = archetype
 	_post_position = post
@@ -66,6 +73,7 @@ func setup(id: int, archetype: AgentArchetype, post: Vector3, exit: Vector3, des
 	_desk_position = desk
 	_departure_phase = DayPhaseMathC.departure_phase(evening_phase, archetype.departure_offset)
 	_morale = MoraleMath.clamp_morale(initial_morale)
+	_fatigue = FatigueMath.clamp_fatigue(initial_fatigue)
 
 func _ready() -> void:
 	_move_speed = _archetype.move_speed
@@ -101,7 +109,13 @@ func _process(delta: float) -> void:
 	c.a = alpha
 	_marker_material.albedo_color = c
 
-func _on_simulation_tick(_tick_delta: float) -> void:
+func _on_simulation_tick(tick_delta: float) -> void:
+	# Fatigue (Story 2.1, NFR2) : accumulation UNIQUEMENT quand l'agent travaille à son
+	# poste (pas en route/au bureau/en partance/le soir), proportionnelle à l'avance de
+	# la journée → cohérente x1/x2/x3 et gelée en pause (plus de tick). 100 % SimClock.
+	if _arrived_at_post and not _leaving and not _at_desk and not _heading_to_desk and not _is_evening():
+		adjust_fatigue(FatigueMath.accrual_per_tick(
+			_BALANCE.fatigue_work_per_day, tick_delta, GameManager.day_duration_seconds))
 	_decide()
 
 func _decide() -> void:
@@ -230,6 +244,11 @@ func is_eligible_for_solicitation() -> bool:
 func get_morale() -> int:
 	return roundi(_morale)
 
+## Nom lisible de l'agent (issu de l'archétype) — pour la fiche agent (1.9) / debug.
+## Lecture seule, purement additif : aucun changement de comportement (modèle get_morale).
+func get_display_name() -> String:
+	return _archetype.display_name if _archetype != null else "Agent"
+
 ## Ajuste le moral d'un delta, borné dans [0, 100]. N'émet agent_morale_changed que si
 ## la valeur change réellement (évite le spam à chaque tick).
 func adjust_morale(delta: float) -> void:
@@ -237,6 +256,19 @@ func adjust_morale(delta: float) -> void:
 	_morale = MoraleMath.clamp_morale(_morale + delta)
 	if _morale != old:
 		EventBus.agent_morale_changed.emit(agent_id, roundi(_morale))
+
+## Valeur entière courante de la fatigue (0-100), pour la fiche agent (1.9) / test (Story 2.1).
+func get_fatigue() -> int:
+	return roundi(_fatigue)
+
+## Ajuste la fatigue d'un delta, bornée dans [0, 100]. N'émet agent_fatigue_changed que si
+## la valeur ENTIÈRE change réellement (anti-spam — jumeau de adjust_morale).
+func adjust_fatigue(delta: float) -> void:
+	var old_shown: int = roundi(_fatigue)
+	_fatigue = FatigueMath.clamp_fatigue(_fatigue + delta)
+	var new_shown: int = roundi(_fatigue)
+	if new_shown != old_shown:
+		EventBus.agent_fatigue_changed.emit(agent_id, new_shown)
 
 ## Assigne (ou ré-assigne) le créneau physique de l'agent dans la file d'attente du
 ## bureau. Met à jour la cible bureau ; si l'agent attend déjà au bureau et qu'il

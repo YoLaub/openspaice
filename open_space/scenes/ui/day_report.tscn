@@ -1,0 +1,51 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/ui/day_report.gd" id="1"]
+
+[node name="DayReport" type="CanvasLayer"]
+script = ExtResource("1")
+
+[node name="Blocker" type="ColorRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color(0, 0, 0, 0.35)
+
+[node name="Panel" type="Panel" parent="Blocker"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -240.0
+offset_top = -160.0
+offset_right = 240.0
+offset_bottom = 160.0
+
+[node name="VBox" type="VBoxContainer" parent="Blocker/Panel"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 24.0
+offset_top = 24.0
+offset_right = -24.0
+offset_bottom = -24.0
+theme_override_constants/separation = 16
+
+[node name="TitleLabel" type="Label" parent="Blocker/Panel/VBox"]
+unique_name_in_owner = true
+text = "Jour 0 terminé"
+
+[node name="TreasuryLabel" type="Label" parent="Blocker/Panel/VBox"]
+unique_name_in_owner = true
+text = "Trésorerie : € —"
+
+[node name="MoraleLabel" type="Label" parent="Blocker/Panel/VBox"]
+unique_name_in_owner = true
+text = "Moral moyen de l'équipe : —"
+
+[node name="MissionLabel" type="Label" parent="Blocker/Panel/VBox"]
+unique_name_in_owner = true
+text = "Avancement mission : —"
+
+[node name="ConfirmButton" type="Button" parent="Blocker/Panel/VBox"]
+unique_name_in_owner = true
+size_flags_vertical = 8
+text = "Lancer la journée suivante"

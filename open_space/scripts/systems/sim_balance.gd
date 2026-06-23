@@ -42,3 +42,25 @@ extends Resource
 @export var morale_decay_per_interval: float = 1.0
 ## Durée (s de jeu) d'un palier de décroissance : "-1 tous les 5 s" → 5.0.
 @export var morale_decay_interval_seconds: float = 5.0
+
+## Story 1.8 — seuils de lisibilité du HUD (signal visuel au franchissement, NFR7).
+## Tunables sans toucher au code ; bornes EXCLUSIVES (cf. HudMath).
+## Moral moyen STRICTEMENT sous ce seuil → compteur en alerte (ambre).
+@export var hud_morale_warn_below: int = 50
+## Moral moyen STRICTEMENT sous ce seuil → compteur critique (rouge).
+@export var hud_morale_critical_below: int = 25
+## Charge d'attention (file bureau + mails) ATTEIGNANT ce seuil → compteurs en alerte.
+@export var hud_attention_warn_at: int = 3
+
+## Story 2.1 — jauge Fatigue par agent (FR13). Tunables sans toucher au code ; calculs
+## sur SimClock (NFR2). Les seuils de risque/burnout (≥80, =100) sont la Story 2.2.
+## Fatigue de départ d'un agent au tout premier matin (0-100).
+@export var agent_initial_fatigue: float = 0.0
+## Fatigue accumulée sur une JOURNÉE COMPLÈTE de travail (répartie par tick SimClock).
+## ~équilibrée avec le repos pour qu'un agent standard tienne dans la durée.
+@export var fatigue_work_per_day: float = 25.0
+## Récupération de fatigue par NUIT (repos entre deux journées) — « repos -25/j » (FR13).
+@export var fatigue_rest_per_day: float = 25.0
+## Bonus de fatigue appliqué à la nuit pour un agent qui FAIT DES HEURES SUP' — « +15/j »
+## (FR13). En 2.1, « heures sup' » = propriété d'archétype (réglage joueur = Story 2.3).
+@export var fatigue_overtime_bonus: float = 15.0
